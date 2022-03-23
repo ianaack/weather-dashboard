@@ -23,7 +23,7 @@ formEl.addEventListener("submit", (event) => {
 
 // convert city value to lat/lon
 var getCoordinates = function () {
-  // format the openweather api url
+  // format the openweather api url and accept only the first 5 array objects
   var coordinatesUrl =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     cityInputEl.value.trim() +
@@ -34,22 +34,32 @@ var getCoordinates = function () {
   fetch(coordinatesUrl)
     .then(function (response) {
       // request was successful
-      if (response.ok) {
-        response.json().then(function (data) {
-          getWeather(data, city, lat, lon);
-        });
-      } else {
-        alert("Error: City Not Found");
+      return response.json();
+    })
+    .then(function (data) {
+      // loop through json object for name, lat, lon
+      for (var i = 0; i < data.length; i++) {
+        var cityName = data[i].name;
+        var lat = data[i].lat;
+        var lon = data[i].lon;
+        console.log(cityName);
+        console.log(lat);
+        console.log(lon);
       }
     })
     .catch(function (error) {
-      alert("Unable to connect to OpenWeather");
+      alert("Unable to Connect to OpenWeather");
     });
-
-  // extract lat, lon, and name data to pass into getWeather function
 };
 
 // fetch city info using lat/lon
+var getCity = function () {
+  var pos = {
+    // lat: x,
+    // lon: y,
+  };
+  console.log(pos);
+};
 
 // display current weather
 // display 5-day forecast
