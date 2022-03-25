@@ -3,6 +3,7 @@ var formEl = document.getElementById("searchForm");
 var cityInputEl = document.getElementById("citySearch");
 var searchBtnEl = document.getElementById("searchBtn");
 var apiKey = "04ca341e77d18f208b89180571b95af1";
+var currentWeatherEl = document.getElementById("currentWeather");
 
 formEl.addEventListener("submit", (event) => {
   // handle the form data
@@ -14,7 +15,8 @@ formEl.addEventListener("submit", (event) => {
   if (city) {
     getCoordinates(city);
 
-    // clear current weather data and city search box
+    // clear old content
+    currentWeatherEl.innerHTML = "";
     cityInputEl.value = "";
   } else {
     alert("Please enter a valid city");
@@ -22,14 +24,13 @@ formEl.addEventListener("submit", (event) => {
 });
 
 // convert city value to lat/lon
-var getCoordinates = function () {
+var getCoordinates = function (city) {
   // format the openweather api url and accept only the first 5 array objects
   var coordinatesUrl =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     cityInputEl.value.trim() +
     "&limit=5&appid=" +
     apiKey;
-
   // make a get request to url
   fetch(coordinatesUrl)
     .then(function (response) {
@@ -37,31 +38,57 @@ var getCoordinates = function () {
       return response.json();
     })
     .then(function (data) {
-      // loop through json object for name, lat, lon
-      for (var i = 0; i < data.length; i++) {
-        var cityName = data[i].name;
-        var lat = data[i].lat;
-        var lon = data[i].lon;
-        console.log(cityName);
-        console.log(lat);
-        console.log(lon);
-      }
+      displayWeather(data);
     })
     .catch(function (error) {
       alert("Unable to Connect to OpenWeather");
     });
 };
 
-// fetch city info using lat/lon
-var getCity = function () {
-  var pos = {
-    // lat: x,
-    // lon: y,
-  };
-  console.log(pos);
-};
+// fetch weather info using lat/lon
+var displayWeather = function (data) {
+  // check if api returned any data
+  if (data.length === 0) {
+    currentWeatherEl.textContent = "No weather data found.";
+    return;
+  }
+  // loop through json object for city name, latitude, and longitude
+  for (var i = 0; i < data.length; i++) {
+    var lat = data[0].lat;
+    var lon = data[0].lon;
+    var name = data[0].name;
+  }
 
-// display current weather
-// display 5-day forecast
+  console.log(lat, lon, name);
+  // fetch openweathermap data using latitude and longitude
+  var cityWeatherUrl =
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    lat +
+    "&lon=" +
+    lon +
+    "&exclude=minutely,hourly,alerts&units=metric&appid=" +
+    apiKey;
+
+  fetch(cityWeatherUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+
+  for (var i = 0; i < data.length; i++) {
+    var momentDate = moment().format("dddd, MMMM Do YYYY");
+    var cityName = document.createElement("h3");
+    var currentDate = document.createElement("h3");
+
+    cityName.textContent = data[0].name;
+    currentDate.textContent = momentDate;
+
+    currentWeatherEl.appendChild(cityName);
+    currentWeatherEl.appendChild(currentDate);
+  }
+};
 // localstorage search history
+
 // create li element for search history
