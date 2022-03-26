@@ -81,33 +81,36 @@ var getCity = function (data) {
     .then(function (response) {
       return response.json();
     })
-    .then(function (data) {
-      displayWeather(data);
+    .then(function (loop) {
+      displayWeather(loop);
+    })
+    .catch(function (error) {
+      alert("Unable to Connect to OpenWeather");
     });
-
-  // add catch error
 
   // print current city and date info to card
   var momentDate = moment().format(" (MM/DD/YYYY)");
   var cityName = document.createElement("h3");
 
-  cityName.textContent = data[0].name + momentDate;
+  cityName.textContent = name + momentDate;
 
   currentWeatherEl.appendChild(cityName);
+
+  console.log(cityWeatherUrl);
 };
 
-// var displayWeather = function (data) {
-//   if (data.length === 0) {
-//     currentWeatherEl.textContent = "No weather data found.";
-//     return;
-//   } else {
-//     // loop through onecall object for weather information
-//     for (var i = 0; i < data.length; i++) {
-//       var currentTemp = data[0].temp;
-//       console.log(currentTemp);
-//     }
-//   }
-// };
+var displayWeather = function (loop) {
+  if (loop.length === 0) {
+    currentWeatherEl.textContent = "No weather data found.";
+    return;
+  } else {
+    // loop through onecall object for weather information
+    for (var i = 0; i < loop.length; i++) {
+      var currentTemp = loop[i].temp;
+    }
+  }
+  console.log(currentTemp);
+};
 // localstorage search history
 
 // create li element for search history
