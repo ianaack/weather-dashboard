@@ -14,23 +14,10 @@ This weather dashboard uses JavaScript to pull the latest weather updates for an
 *WHEN I search for a city
 \*THEN I am presented with current and future conditions for that city and that city is added to the search history
 
-- card for search box
-- set localStorage for input field
 - card for history
 - get localStorage for buttons (history)
 
 ---
-
-\*WHEN I view current weather conditions for that city
-THEN I am presented with:
-
-- the city name,
-- the date,
-- an icon representation of weather conditions,
-- the temperature,
-- the humidity,
-- the wind speed,
-- and the UV index
 
 ---
 
@@ -41,15 +28,6 @@ THEN I am presented with a color that indicates whether the conditions are favor
 - addClass
 
 ---
-
-\*WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that:
-
-- displays the date,
-- an icon representation of weather conditions,
-- the temperature,
-- the wind speed,
-- and the humidity
 
 ---
 
