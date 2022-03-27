@@ -45,23 +45,16 @@ formEl.addEventListener("submit", (event) => {
   localStorage.setItem("allCities", JSON.stringify(existingEntries));
 
   // print localStorage to list items
-  historyEl.innerHTML = "";
   for (var i = 0; i < existingEntries.length; i++) {
     var historyItem = document.createElement("li");
     historyItem.setAttribute("class", "col-10 m-2 btn btn-primary");
     historyItem.textContent = ("cities", existingEntries[i]);
-
     historyEl.appendChild(historyItem);
+    historyItem.addEventListener("click", function () {
+      cityInputEl.value = existingEntries[i];
+      getCoordinates(city);
+    });
   }
-
-  // when clicked, history search item re-appears
-  historyItem.addEventListener("click", function () {
-    for (var i = 0; i < existingEntries.length; i++) {
-      if (existingEntries === city[i].value) {
-        return city[i];
-      }
-    }
-  });
 
   // when Clear button is clicked, localStorage is cleared and page is refreshed
   clearBtnEl.addEventListener("click", function () {
