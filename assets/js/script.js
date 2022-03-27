@@ -10,8 +10,7 @@ var dayTwo = document.getElementById("day2");
 var dayThree = document.getElementById("day3");
 var dayFour = document.getElementById("day4");
 var dayFive = document.getElementById("day5");
-var cities = [];
-var searchHistory = JSON.parse(localStorage.getItem("cities")) || [];
+var historyEl = document.getElementById("searchHistory");
 
 // user submits search item via form
 formEl.addEventListener("submit", (event) => {
@@ -38,6 +37,16 @@ formEl.addEventListener("submit", (event) => {
   localStorage.setItem("allCities", JSON.stringify(existingEntries));
 
   // print localStorage to list items
+  for (var i = 0; i < existingEntries.length; i++) {
+    var historyItem = document.createElement("li");
+    historyItem.setAttribute("class", "p-0 m-1 btn btn-primary");
+    historyItem.textContent = ("cities", existingEntries[i]);
+    historyItem.addEventListener("click", function () {
+      getCoordinates();
+    });
+
+    historyEl.appendChild(historyItem);
+  }
 });
 
 // convert city value to lat/lon
@@ -265,3 +274,4 @@ var displayWeather = function (loop) {
 };
 
 // create li element for search history
+var searchHistory = function () {};
