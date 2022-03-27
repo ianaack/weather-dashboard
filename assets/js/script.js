@@ -24,14 +24,6 @@ formEl.addEventListener("submit", (event) => {
   if (city) {
     // run function
     getCoordinates(city);
-    // clear old content
-    currentWeatherEl.innerHTML = "";
-    cityInputEl.value = "";
-    dayOne.innerHTML = "";
-    dayTwo.innerHTML = "";
-    dayThree.innerHTML = "";
-    dayFour.innerHTML = "";
-    dayFive.innerHTML = "";
   } else {
     // user must submit a search value
     city === null(alert("Please enter a valid city"));
@@ -45,13 +37,15 @@ formEl.addEventListener("submit", (event) => {
   localStorage.setItem("allCities", JSON.stringify(existingEntries));
 
   // print localStorage to list items
+  historyEl.innerHTML = "";
   for (var i = 0; i < existingEntries.length; i++) {
     var historyItem = document.createElement("li");
     historyItem.setAttribute("class", "col-10 m-2 btn btn-primary");
     historyItem.textContent = ("cities", existingEntries[i]);
     historyEl.appendChild(historyItem);
-    historyItem.addEventListener("click", function () {
-      cityInputEl.value = existingEntries[i];
+    historyItem.addEventListener("click", function (event) {
+      var city = event.target.textContent;
+      cityInputEl.value = city;
       getCoordinates(city);
     });
   }
@@ -93,6 +87,7 @@ var getCity = function (data) {
     currentWeatherEl.textContent = "No weather data found.";
     return;
   } else {
+    currentWeatherEl.innerHTML = "";
     // loop through json object for city name, latitude, and longitude
     for (var i = 0; i < data.length; i++) {
       var lat = data[0].lat;
@@ -134,6 +129,12 @@ var getCity = function (data) {
 
 // print all weather information to the appropriate elements
 var displayWeather = function (loop) {
+  cityInputEl.value = "";
+  dayOne.innerHTML = "";
+  dayTwo.innerHTML = "";
+  dayThree.innerHTML = "";
+  dayFour.innerHTML = "";
+  dayFive.innerHTML = "";
   // if no weather info, display message in card
   if (loop.length === 0) {
     currentWeatherEl.textContent = "No weather data found.";
