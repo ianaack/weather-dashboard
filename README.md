@@ -1,35 +1,23 @@
-# weather-dashboard
+# Weather Dashboard
 
-This weather dashboard uses JavaScript to pull the latest weather updates for any city.
+This weather dashboard uses JavaScript to pull current weather, and a 5-day forecast. <br>
+Cities that users previously searched will be available thanks to localStorage!
 
-## User Story
+## Functionality
 
-*AS A traveler
-*I WANT to see the weather outlook for multiple cities
-\*SO THAT I can plan a trip accordingly
+When a user searches for a cities weather, the city is saved to a search history that the user can choose to keep or clear. <br>
+The website then pulls the current weather data (Temperature, Wind, Humidity and UV Index) for that city as well as a 5-day forecast. <br>
+If the user clicks on an item in the search history, the weather data for that city will repopulate.
 
-## Acceptance Criteria
+## Website URL:
+https://ianaack.github.io/weather-dashboard/
 
-*GIVEN a weather dashboard with form inputs
-*WHEN I search for a city
-\*THEN I am presented with current and future conditions for that city and that city is added to the search history
+## Website Snapshot
+![image](https://user-images.githubusercontent.com/47282257/160293542-e381155c-da2a-42e5-b132-2aa6b4874ec9.png)
 
-- card for history
-- get localStorage for buttons (history)
-
----
-
----
-
-\*WHEN I view the UV index
-THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-
-- if/else statement for UV index rating
-- addClass
-
----
-
----
-
-\*WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
+## Technologies Used
+JavaScript <br>
+HTML <br>
+CSS <br>
+Bootstrap <br>
+OpenWeatherMap API
