@@ -26,8 +26,13 @@ formEl.addEventListener("submit", (event) => {
     // clear old content
     currentWeatherEl.innerHTML = "";
     cityInputEl.value = "";
+    dayOne.innerHTML = "";
+    dayTwo.innerHTML = "";
+    dayThree.innerHTML = "";
+    dayFour.innerHTML = "";
+    dayFive.innerHTML = "";
   } else {
-    alert("Please enter a valid city");
+    city === null(alert("Please enter a valid city"));
   }
 
   // save city searches to localStorage
@@ -48,20 +53,18 @@ formEl.addEventListener("submit", (event) => {
   }
 
   historyItem.addEventListener("click", function () {
-    cityInputEl.value = "";
     for (var i = 0; i < existingEntries.length; i += 1) {
       if (existingEntries === city[i].value) {
         return city[i];
       }
     }
   });
-});
 
-var clearHistory = function () {
   clearBtnEl.addEventListener("click", function () {
     localStorage.clear();
+    window.location.reload();
   });
-};
+});
 
 // convert city value to lat/lon
 var getCoordinates = function () {
@@ -127,7 +130,6 @@ var getCity = function (data) {
   var cityName = document.createElement("h3");
 
   cityName.innerHTML = name + momentDate;
-
   currentWeatherEl.appendChild(cityName);
 
   console.log(cityWeatherUrl);
