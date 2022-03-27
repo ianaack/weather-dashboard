@@ -125,6 +125,8 @@ var getCity = function (data) {
 
   cityName.innerHTML = name + momentDate;
   currentWeatherEl.appendChild(cityName);
+
+  console.log(cityWeatherUrl);
 };
 
 // print all weather information to the appropriate elements
@@ -147,6 +149,19 @@ var displayWeather = function (loop) {
     var currentWind = document.createElement("p");
     var currentHumidity = document.createElement("p");
     var currentUV = document.createElement("p");
+
+    if ((loop.current.uvi = 0 || 1 || 2)) {
+      currentUV.classList.add(".green");
+    } else if ((loop.current.uvi = 3 || 4 || 5)) {
+      currentUV.classList.add(".yellow");
+    } else if ((loop.current.uvi = 6 || 7)) {
+      currentUV.classList.add(".orange");
+    } else if ((loop.current.uvi = 8 || 9 || 10)) {
+      currentUV.classList.add(".red");
+    } else {
+      currentUV.classList.add(".purple");
+    }
+
     var weatherIcon = loop.current.weather[0].icon;
     var currentIcon = document.createElement("img");
     // pull openweather icon
@@ -159,7 +174,7 @@ var displayWeather = function (loop) {
     currentWind.textContent =
       "Wind Speed: " + loop.current.wind_speed + " KM/h";
     currentHumidity.textContent = "Humidity: " + loop.current.humidity + " %";
-    currentUV.textContent = "UV Index: " + loop.current.uvi;
+    currentUV.innerHTML = "UV Index: " + loop.current.uvi;
 
     currentWeatherEl.appendChild(currentIcon);
     currentWeatherEl.appendChild(currentTemp);
