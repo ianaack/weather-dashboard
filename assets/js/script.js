@@ -149,19 +149,25 @@ var displayWeather = function (loop) {
     var currentWind = document.createElement("p");
     var currentHumidity = document.createElement("p");
     var currentUV = document.createElement("p");
+    var exactUVI = loop.current.uvi;
+    var uvi = Math.floor(loop.current.uvi);
+    console.log(uvi);
+    console.log(uvi === 0 || uvi === 1 || uvi === 2);
+    console.log(uvi === 3 || uvi === 4 || uvi === 5);
+    console.log(uvi === 6 || uvi === 7);
+    console.log(uvi === 8 || uvi === 9 || uvi === 10);
 
-    if ((loop.current.uvi = 0 || 1 || 2)) {
-      currentUV.classList.add(".green");
-    } else if ((loop.current.uvi = 3 || 4 || 5)) {
-      currentUV.classList.add(".yellow");
-    } else if ((loop.current.uvi = 6 || 7)) {
-      currentUV.classList.add(".orange");
-    } else if ((loop.current.uvi = 8 || 9 || 10)) {
-      currentUV.classList.add(".red");
+    if (uvi === 0 || uvi === 1 || uvi === 2) {
+      currentUV.classList.add("green");
+    } else if (uvi === 3 || uvi === 4 || uvi === 5) {
+      currentUV.classList.add("yellow");
+    } else if (uvi === 6 || uvi === 7) {
+      currentUV.classList.add("orange");
+    } else if (uvi === 8 || uvi === 9 || uvi === 10) {
+      currentUV.classList.add("red");
     } else {
-      currentUV.classList.add(".purple");
+      currentUV.classList.add("purple");
     }
-
     var weatherIcon = loop.current.weather[0].icon;
     var currentIcon = document.createElement("img");
     // pull openweather icon
@@ -174,7 +180,7 @@ var displayWeather = function (loop) {
     currentWind.textContent =
       "Wind Speed: " + loop.current.wind_speed + " KM/h";
     currentHumidity.textContent = "Humidity: " + loop.current.humidity + " %";
-    currentUV.innerHTML = "UV Index: " + loop.current.uvi;
+    currentUV.textContent = "UV Index: " + exactUVI;
 
     currentWeatherEl.appendChild(currentIcon);
     currentWeatherEl.appendChild(currentTemp);
