@@ -61,7 +61,7 @@ formEl.addEventListener("submit", (event) => {
 var getCoordinates = function () {
   // format the openweather api url and accept only the first 5 array objects
   var coordinatesUrl =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     cityInputEl.value.trim() +
     "&limit=5&appid=" +
     apiKey;
@@ -151,11 +151,6 @@ var displayWeather = function (loop) {
     var currentUV = document.createElement("p");
     var exactUVI = loop.current.uvi;
     var uvi = Math.floor(loop.current.uvi);
-    console.log(uvi);
-    console.log(uvi === 0 || uvi === 1 || uvi === 2);
-    console.log(uvi === 3 || uvi === 4 || uvi === 5);
-    console.log(uvi === 6 || uvi === 7);
-    console.log(uvi === 8 || uvi === 9 || uvi === 10);
 
     if (uvi === 0 || uvi === 1 || uvi === 2) {
       currentUV.classList.add("green");
@@ -173,7 +168,7 @@ var displayWeather = function (loop) {
     // pull openweather icon
     currentIcon.setAttribute(
       "src",
-      "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
+      "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
     );
 
     currentTemp.textContent = "Temp: " + loop.current.temp + "\u00B0C";
@@ -199,7 +194,7 @@ var displayWeather = function (loop) {
     // pull openweather icon
     day1Icon.setAttribute(
       "src",
-      "http://openweathermap.org/img/wn/" + day1WeatherIcon + "@2x.png"
+      "https://openweathermap.org/img/wn/" + day1WeatherIcon + "@2x.png"
     );
 
     displayDay1Date.textContent = day1Date;
@@ -224,7 +219,7 @@ var displayWeather = function (loop) {
     // pull openweather icon
     day2Icon.setAttribute(
       "src",
-      "http://openweathermap.org/img/wn/" + day2WeatherIcon + "@2x.png"
+      "https://openweathermap.org/img/wn/" + day2WeatherIcon + "@2x.png"
     );
 
     displayDay2Date.textContent = day2Date;
@@ -249,7 +244,7 @@ var displayWeather = function (loop) {
     // pull openweather icon
     day3Icon.setAttribute(
       "src",
-      "http://openweathermap.org/img/wn/" + day3WeatherIcon + "@2x.png"
+      "https://openweathermap.org/img/wn/" + day3WeatherIcon + "@2x.png"
     );
 
     displayDay3Date.textContent = day3Date;
@@ -274,7 +269,7 @@ var displayWeather = function (loop) {
     // pull openweather icon
     day4Icon.setAttribute(
       "src",
-      "http://openweathermap.org/img/wn/" + day4WeatherIcon + "@2x.png"
+      "https://openweathermap.org/img/wn/" + day4WeatherIcon + "@2x.png"
     );
 
     displayDay4Date.textContent = day4Date;
@@ -299,7 +294,7 @@ var displayWeather = function (loop) {
     // pull openweather icon
     day5Icon.setAttribute(
       "src",
-      "http://openweathermap.org/img/wn/" + day5WeatherIcon + "@2x.png"
+      "https://openweathermap.org/img/wn/" + day5WeatherIcon + "@2x.png"
     );
 
     displayDay5Date.textContent = day5Date;
