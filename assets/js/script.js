@@ -2,6 +2,7 @@
 var formEl = document.getElementById("searchForm");
 var cityInputEl = document.getElementById("citySearch");
 var searchBtnEl = document.getElementById("searchBtn");
+var clearBtnEl = document.getElementById("clearBtn");
 var apiKey = "04ca341e77d18f208b89180571b95af1";
 var currentWeatherEl = document.getElementById("currentWeather");
 var forecastEl = document.getElementById("forecast");
@@ -37,20 +38,33 @@ formEl.addEventListener("submit", (event) => {
   localStorage.setItem("allCities", JSON.stringify(existingEntries));
 
   // print localStorage to list items
+  historyEl.innerHTML = "";
   for (var i = 0; i < existingEntries.length; i++) {
     var historyItem = document.createElement("li");
-    historyItem.setAttribute("class", "p-0 m-1 btn btn-primary");
+    historyItem.setAttribute("class", "p-0 m-1 btn btn-block btn-primary");
     historyItem.textContent = ("cities", existingEntries[i]);
-    historyItem.addEventListener("click", function () {
-      getCoordinates();
-    });
 
     historyEl.appendChild(historyItem);
   }
+
+  historyItem.addEventListener("click", function () {
+    cityInputEl.value = "";
+    for (var i = 0; i < existingEntries.length; i += 1) {
+      if (existingEntries === city[i].value) {
+        return city[i];
+      }
+    }
+  });
 });
 
+var clearHistory = function () {
+  clearBtnEl.addEventListener("click", function () {
+    localStorage.clear();
+  });
+};
+
 // convert city value to lat/lon
-var getCoordinates = function (city) {
+var getCoordinates = function () {
   // format the openweather api url and accept only the first 5 array objects
   var coordinatesUrl =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -131,7 +145,6 @@ var displayWeather = function (loop) {
     var currentWind = document.createElement("p");
     var currentHumidity = document.createElement("p");
     var currentUV = document.createElement("p");
-
     var weatherIcon = loop.current.weather[0].icon;
     var currentIcon = document.createElement("img");
     currentIcon.setAttribute(
@@ -272,6 +285,3 @@ var displayWeather = function (loop) {
     dayFive.appendChild(day5Humidity);
   }
 };
-
-// create li element for search history
-var searchHistory = function () {};
